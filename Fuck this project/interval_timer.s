@@ -44,7 +44,8 @@ SLOW:
 	
 RES:
 	movia r19, HEX_bits
-	br INTERVAL_TIMER_ISR
+	ldw 	r6, 0(r19)
+	stwio	r6, 0(r20)
 
 END_INTERVAL_TIMER_ISR:
 	stw		r6, 0(r21)				/* store HEX display pattern */
