@@ -20,6 +20,8 @@ _start:
 	movia		r9, 0x10000010
 	movia		r23, 0x00000040 	/* Setup that LED son */
 	stwio 		r23, 0(r9)
+	movia		r17, SPEED
+	addi 		r17, r17, 12
 
 	/* set the interval timer period for scrolling the HEX displays */
 	movia		r12, 0x00f00000			/* 1/(50 MHz) x (0x190000) = 33 msec */
@@ -53,13 +55,18 @@ IDLE:
 	.global	PATTERN
 
 	.global	KEY_PRESSED
-	.global SPEED
+	.global	SPEED
 SPEED:
-	.word 0x00000003
-	
-	.global OFFSET
+	.word 0x000fffff
+	.word 0x003fffff
+	.word 0x008fffff
+	.word 0x00f00000
+	.word 0x00ffffff
+	.word 0x01f00000
+	.word 0x01ffffff
+
 OFFSET:
-	.word 0x00000000
+	.word 0x00000005
 
 	.global HEX_bits
 HEX_bits:

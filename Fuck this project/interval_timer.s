@@ -34,14 +34,13 @@ INTERVAL_TIMER_ISR:
 	stwio		r6, 0(r20)				/* store to HEX3 ... HEX0 */
 	beq			r19, r21, RES
 	addi		r19, r19, 4
-	ldw			r4, 0(r22)				/* check which key has been pressed */
-	movi		r8, KEY1				/* code to check for KEY1 */
-	beq			r4, r8, SLOW 			/* for KEY1 pressed, shift right */
-	rol			r6, r6, r5				/* else (for KEY2) pressed, shift left */
 	br	 		END_INTERVAL_TIMER_ISR
 SLOW:
-	srli		r23, r23, 1					/* rotate the displayed pattern right */
+
 	br END_INTERVAL_TIMER_ISR
+
+FAST:
+	
 	
 RES:
 	movia r19, HEX_bits
