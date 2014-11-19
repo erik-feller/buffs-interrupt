@@ -17,8 +17,8 @@ _start:
 	movia 	sp, 0x007FFFFC			/* stack starts from largest memory address */
 
 	movia		r16, 0x10002000		/* internal timer base address */
-	movia		r9, 0x10000000
-	movia		r10, 0x0000001F
+	movia		r9, 0x10000010
+	movia		r10, 0b00000000000000000000000001000000
 	stwio 		r10, 0(r9)
 
 	/* set the interval timer period for scrolling the HEX displays */
