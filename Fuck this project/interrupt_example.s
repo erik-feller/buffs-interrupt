@@ -18,11 +18,11 @@ _start:
 
 	movia		r16, 0x10002000		/* internal timer base address */
 	movia		r9, 0x10000010
-	movia		r10, 0b00000000000000000000000001000000
-	stwio 		r10, 0(r9)
+	movia		r23, 0x00000040 	/* Setup that LED son */
+	stwio 		r23, 0(r9)
 
 	/* set the interval timer period for scrolling the HEX displays */
-	movia		r12, 0x00F00000			/* 1/(50 MHz) x (0x190000) = 33 msec */
+	movia		r12, 0x00f00000			/* 1/(50 MHz) x (0x190000) = 33 msec */
 	sthio		r12, 8(r16)				/* store the low half word of counter start value */ 
 	srli		r12, r12, 16
 	sthio		r12, 0xC(r16)			/* high half word of counter start value */ 
@@ -51,9 +51,7 @@ IDLE:
 /* The two global variables used by the interrupt service routines for the interval timer
  * and the pushbutton keys are declared below */
 	.global	PATTERN
-PATTERN:
-	.word		0xFFFFFFFF				/* pattern to show on the HEX displays */
-	
+
 	.global	KEY_PRESSED
 	.global SPEED
 SPEED:
